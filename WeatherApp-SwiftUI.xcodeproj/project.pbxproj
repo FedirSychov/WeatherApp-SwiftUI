@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E0DAE5E27BEC8890065D5CE /* RingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0DAE5D27BEC8890065D5CE /* RingView.swift */; };
 		7E80804C27BE90B900019A49 /* WeatherApp_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E80804B27BE90B900019A49 /* WeatherApp_SwiftUIApp.swift */; };
 		7E80804E27BE90B900019A49 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E80804D27BE90B900019A49 /* ContentView.swift */; };
 		7E80805027BE90B900019A49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E80804F27BE90B900019A49 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E0DAE5D27BEC8890065D5CE /* RingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingView.swift; sourceTree = "<group>"; };
 		7E80804827BE90B900019A49 /* WeatherApp-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WeatherApp-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E80804B27BE90B900019A49 /* WeatherApp_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApp_SwiftUIApp.swift; sourceTree = "<group>"; };
 		7E80804D27BE90B900019A49 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				7E80804D27BE90B900019A49 /* ContentView.swift */,
+				7E0DAE5D27BEC8890065D5CE /* RingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E0DAE5E27BEC8890065D5CE /* RingView.swift in Sources */,
 				7E80804E27BE90B900019A49 /* ContentView.swift in Sources */,
 				7E80807D27BE941900019A49 /* WeatherBitData.swift in Sources */,
 				7E80808627BE948800019A49 /* WeatherBitService.swift in Sources */,

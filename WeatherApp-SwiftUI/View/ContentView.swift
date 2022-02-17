@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var location = "Augsburg2"
+    @State var location = "\(Image(systemName: "location")) Augsburg"
     @State var date = "22.22.2222"
     @State var summary = "Sample Summary"
     @State var forecast = "Sample forecast"
     @State var searchedSity = ""
     
     @State var textFieldHidden: Bool = true
+    @State var tap: Bool = false
     
     @State var testData: [String] = ["Augsburg", "Odessa", "Munchen", "Frankfurt", "Dusseldorf", "Kiev", "Hamburg", "Munster"]
     @State var standartData: [String] = ["Augsburg", "Odessa", "Munchen", "Frankfurt", "Dusseldorf", "Kiev", "Hamburg", "Munster"]
@@ -50,32 +51,48 @@ struct ContentView: View {
         
         HStack {
             VStack(alignment: .leading) {
-                Text(location)
-                
-                Text(date)
-                
-                Text(summary)
-                
-                Text(forecast)
-                
-                HStack {
-                    Button("Search") {
-                        textFieldHidden.toggle()
-                        if textFieldHidden == true {
-                            testData = standartData
-                        }
-                    }
-                    
-                    TextField("Enter city name", text: binding) {
+                VStack(alignment: .leading) {
+                    VStack(alignment: .leading) {
+                        Text(location)
+                            .padding(.top, 10)
+                        
+                        Text(date)
+                            .padding(.top, 10)
+                        
+                        Text(summary)
+                            .padding(.top, 10)
                         
                     }
-                    .opacity(textFieldHidden ? 0 : 1)
+                    .foregroundColor(Color.black)
+                    .animation(.easeOut(duration: 0.3))
+                    .animation(.linear(duration: 5))
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                    
+                    HStack {
+                        Button("\(Image(systemName: "magnifyingglass"))") {
+                            textFieldHidden.toggle()
+                            if textFieldHidden == true {
+                                testData = standartData
+                            }
+                        }
+                        
+                        TextField("Enter city name", text: binding) {
+                            
+                        }
+                        .opacity(textFieldHidden ? 0 : 1)
+                        
+                        //Loading animation
+                        RingView(color1: #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1), color2: #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1), width: 40, height: 40, percent: tap ? 100 : 0, show: .constant(true))
+                            .animation(.linear)
+                    }
+                    .task {
+                        await returnRingView()
+                    }
                 }
+                .padding()
                 
-                ListView(viewModel: $viewModel, testData: $testData)
-                    .background(Color.black)
+                ListView(viewModel: $viewModel, testData: $testData, tap: $tap, location: $location, date: $date, summary: $summary, forecast: $forecast)
             }
-            .padding()
             Spacer()
         }
         .onAppear {
@@ -97,6 +114,12 @@ struct ContentView: View {
                 self.forecast = forecast
             }
         }
+        .background(Image("Background1"))
+    }
+    
+    private func returnRingView() async {
+        try? await Task.sleep(nanoseconds: 1)
+        self.tap = false
     }
 }
 
@@ -109,6 +132,11 @@ struct ContentView_Previews: PreviewProvider {
 struct ListView: View {
     @Binding var viewModel: WeatherViewModel
     @Binding var testData: [String]
+    @Binding var tap: Bool
+    @Binding var location: String
+    @Binding var date: String
+    @Binding var summary: String
+    @Binding var forecast: String
     
     var body: some View {
         List {
@@ -119,7 +147,15 @@ struct ListView: View {
                 }
                 .frame(height: 44)
                 .onTapGesture {
-                    viewModel.changeLocation(to: testData)
+                    location = " "
+                    date = " "
+                    summary = " "
+                    forecast = " "
+                    tap = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        self.tap = false
+                        viewModel.changeLocation(to: testData)
+                    }
                 }
             }
         }

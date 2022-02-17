@@ -43,10 +43,10 @@ public class WeatherViewModel {
         return
       }
       self.locationName.value = "Not found"
-      self.date.value = ""
+      self.date.value = " "
       self.icon.value = nil
-      self.summary.value = ""
-      self.forecastSummary.value = ""
+      self.summary.value = " "
+      self.forecastSummary.value = " "
     }
   }
   
@@ -65,7 +65,7 @@ public class WeatherViewModel {
       let temp = self.tempFormatter
         .string(from: weatherData.currentTemp as NSNumber) ?? ""
       self.summary.value = "\(weatherData.description) - \(temp)℉"
-      self.forecastSummary.value = "\nSummary: \(weatherData.description)"
+      self.forecastSummary.value = "Summary: \(weatherData.description)"
     }
   }
 }
